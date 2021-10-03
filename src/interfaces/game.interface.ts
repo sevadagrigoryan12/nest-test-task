@@ -1,8 +1,10 @@
+import { IPublisher } from './publisher.interface';
+
 export interface IGame {
   id?: string;
   title: string;
   price: number;
-  publisher: string;
+  publisher: IPublisher;
   tags: string[];
   releaseDate: Date;
 }

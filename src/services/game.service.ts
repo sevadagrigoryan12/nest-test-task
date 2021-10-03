@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { GameDocument, Game } from '../schemas';
 import { IGame } from '../interfaces';
 import { CreateGameRequest } from '../models';
-import { calculatePastDate } from '../utils';
+import { calculatePastDate, PRICE_DISCOUNT } from '../utils';
 
 @Injectable()
 export class GameService {
@@ -16,7 +16,7 @@ export class GameService {
     return this.gameModel.find();
   }
 
-  async findPublisher(gameId: string) {
+  async findPublisher(gameId: string): Promise<IGame> {
     return this.gameModel
       .findById(gameId)
       .select('publisher')
@@ -36,7 +36,7 @@ export class GameService {
         releaseDate: { $gt: calculatePastDate(18), $lt: calculatePastDate(12) },
       },
       {
-        $mul: { price: 0.8 },
+        $mul: { price: PRICE_DISCOUNT },
       },
     );
   }

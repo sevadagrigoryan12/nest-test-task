@@ -15,5 +15,5 @@ export class CreatePublisherRequest {
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  phone: number;
+  phone: string;
 }

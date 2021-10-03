@@ -21,7 +21,7 @@ export class GameController {
   @Get('/:id/publisher')
   @ApiOperation({ summary: 'Fetch publisher info by given game' })
   @ApiResponse({ status: 200, description: 'Publisher data is gotten' })
-  async getPublisherByGame(@Param('id') id): Promise<IGame[]> {
+  async getPublisherByGame(@Param('id') id): Promise<IGame> {
     return this.gameService.findPublisher(id);
   }
 
@@ -33,7 +33,9 @@ export class GameController {
   }
 
   @Post('/processForReleaseDates')
-  @ApiOperation({ summary: 'remove the games having a release date older than 18 months and apply a discount' })
+  @ApiOperation({
+    summary: 'remove the games having a release date older than 18 months and apply a discount',
+  })
   @ApiResponse({ status: 200, description: 'Required updates was applied' })
   async processForReleaseDates(): Promise<void> {
     await this.gameService.processForReleaseDates();
