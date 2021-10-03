@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  backend:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    env_file:
+      - .env
+      
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+      - mongo_data:/data/db
+    env_file:
+      - .env
+
+volumes:
+  mongo_data:
