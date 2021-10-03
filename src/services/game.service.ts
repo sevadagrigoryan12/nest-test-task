@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { GameDocument, Game } from '../schemas';
 import { IGame } from '../interfaces';
 import { CreateGameRequest } from '../models';
-import { calculatePastDate } from 'src/utils';
+import { calculatePastDate } from '../utils';
 
 @Injectable()
 export class GameService {
